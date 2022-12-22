@@ -7,8 +7,9 @@ var express_1 = __importDefault(require("express"));
 var app = (0, express_1.default)();
 var port = 3000;
 app.get("/api", function (req, res) {
-    res.send("Hello, Udacity!!");
+    res.send("Hello, Udacity Test!!");
 });
 app.listen(port, function () {
     console.log("server started at localhost: ", port);
 });
+exports.default = app;
