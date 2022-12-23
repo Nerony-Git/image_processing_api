@@ -1,5 +1,6 @@
 import express from "express";
 import fs from "fs";
+import sharp from "sharp";
 //import { promises as fsPromises } from "fs";
 
 const images = express.Router();
@@ -9,15 +10,31 @@ images.get("/", (req, res) => {
     const width = req.query.width as string;
     const height = req.query.height as string;
     const file_path = "./images_data/image_input/" + filename + ".jpg" as string;
+    //const output_filename = filename + "_thumb.jpg" as string;
+    const output_file_path = "./images_data/image_output/" + filename + "_thumb.jpg" as string;
     
 
 
     //Validate inputs
     if(filename !== undefined && width !== undefined && height !== undefined) {
         res.send("File Name: " + filename + ", Width: " + width + ", Height: " + height);
-        // Check if file exist in images_data folder
+        // Check if file exist in image_input folder of the images_data folder
         if(fs.existsSync(file_path)) {
             console.log(filename + " exists in images data folder");
+
+            // Check if file exist in image_output folder of the images_data folder
+            if(fs.existsSync(output_file_path)){
+                //return already resized image in image_output folder
+                console.log("Yes");
+            }else{
+                //resize image 
+                sharp(file_path)
+                    .resize(parseInt(width), parseInt(height),{
+                        fit: "inside"
+                    })
+                    .toFile(output_file_path)
+                console.log("");
+            }
         }else {
             console.log(filename + " does not exists in images data folder");
         }
