@@ -7,6 +7,8 @@
     "server": "nodemon src/index.ts",
     "build": "npx tsc",
     "jasmine": "jasmine",
+    "lint": "eslint src/**/*.ts",
+    "prettier": "prettier --config .prettierrc src/**/*.ts --write",
     "test": "npm run build && npm run jasmine",
     "start": "npm run build && npm run server"
   },
