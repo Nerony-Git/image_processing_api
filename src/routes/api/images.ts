@@ -1,3 +1,4 @@
+import { path } from "app-root-path";
 import express from "express";
 import fs from "fs";
 import sharp from "sharp";
@@ -10,14 +11,14 @@ images.get("/", (req, res) => {
     const width = req.query.width as string;
     const height = req.query.height as string;
     const file_path = "./images_data/image_input/" + filename + ".jpg" as string;
-    //const output_filename = filename + "_thumb.jpg" as string;
+    const output_filename = "/images_data/image_output/" + filename + "_thumb.jpg" as string;
     const output_file_path = "./images_data/image_output/" + filename + "_thumb.jpg" as string;
     
 
 
     //Validate inputs
     if(filename !== undefined && width !== undefined && height !== undefined) {
-        res.send("File Name: " + filename + ", Width: " + width + ", Height: " + height);
+        //res.send("File Name: " + filename + ", Width: " + width + ", Height: " + height);
         // Check if file exist in image_input folder of the images_data folder
         if(fs.existsSync(file_path)) {
             console.log(filename + " exists in images data folder");
@@ -33,7 +34,8 @@ images.get("/", (req, res) => {
                         fit: "inside"
                     })
                     .toFile(output_file_path)
-                console.log("");
+                //console.log("");
+                res.sendFile(path + output_filename);
             }
         }else {
             console.log(filename + " does not exists in images data folder");
