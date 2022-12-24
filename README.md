@@ -10,14 +10,14 @@ This project is an API that can be used in two different ways namely;
 ## ⏬ Installation  
 > **_Clone repository_**  
 >> Navigate to the directory you want to install the project, open command prompt from the directory and type the code below to clone this repository.  
->  
+>>  
 >>```sh
 >> git clone https://github.com/Nerony-Git/image_processing_api.git
 >>```  
 >  
 > **_Open directory API was cloned to_**  
 >> Navigate to the directory using the code below:  
->  
+>>  
 >>```sh
 >> cd image_processing_api
 >>```  
@@ -28,4 +28,48 @@ This project is an API that can be used in two different ways namely;
 >> ```sh
 >>  npm install
 >> ```  
-
+>  
+  
+## 📝 Scripts
+> **_Run Server_**
+>> To start the server, type the code below in the terminal.
+>>
+>>```sh
+>> npm run server
+>>```  
+>  
+> **_Prettier**
+>> To format the code use the code below.
+>>
+>>```sh
+>> npm run prettier
+>>```  
+>  
+> **_Lint_**
+>> To check for errors in the code and confirm the style of the code is consistent, type the code below in the terminal.
+>>
+>>```sh
+>> npm run lint
+>>```  
+>  
+> **_Test_**
+>> To run a unit test, type the code below in the terminal.
+>>
+>>```sh
+>> npm run test
+>>```  
+>  
+> **_Build Only_**
+>> To compile the typescript to javascript for production, type the code below in the terminal.
+>>
+>>```sh
+>> npm run build
+>>```  
+>  
+> **_Build & Run Server_**
+>> To compile for production and start the server, type the code below in the terminal.
+>>
+>>```sh
+>> npm run server
+>>```  
+>  
