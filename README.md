@@ -8,7 +8,11 @@ This project is an API that can be used in two different ways namely;
 **2️⃣ As a Library:** to serve properly scaled versions of images to the front end to reduce page load size rather than needing to resize and upload multiple copies of the same image to be used throughout the site.  
 
 ## ⏬ Installation  
-> Clone repository  
-```sh
-$ git clone https://github.com/Nerony-Git/image_processing_api.git
-```  
+> **_Clone repository_**  
+>
+>>```sh
+>>$ git clone https://github.com/Nerony-Git/image_processing_api.git
+>>```  
+>  
+> **_Navigate to directory API was cloned to_**  
+>   
