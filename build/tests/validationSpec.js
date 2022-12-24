@@ -62,22 +62,63 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var index_1 = __importDefault(require("./routes/index"));
-var logger_1 = __importDefault(require("./utilities/logger"));
-var verify = __importStar(require("./utilities/validation"));
-var app = (0, express_1.default)();
-var port = 3000;
-app.use(logger_1.default, index_1.default);
-app.listen(port, function () { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, verify.default.check_output_folder()];
+var App_path = __importStar(require("../utilities/app_path"));
+var store_image_output_1 = __importDefault(require("../utilities/store_image_output"));
+var fs_1 = require("fs");
+describe("Testing image resizing", function () {
+    describe("Image resizing", function () {
+        it("Image resized", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var output_image, msg, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, (0, store_image_output_1.default)({
+                            filename: "icelandwaterfall",
+                            width: "200",
+                            height: "500"
+                        })];
+                    case 1:
+                        _b.sent();
+                        output_image = App_path.default.path.resolve(App_path.default.output_file_path, "icelandwaterfall_thumb.jpg");
+                        _b.label = 2;
+                    case 2:
+                        _b.trys.push([2, 4, , 5]);
+                        return [4 /*yield*/, fs_1.promises.access(output_image)];
+                    case 3:
+                        _b.sent();
+                        msg = "Image resized!";
+                        return [3 /*break*/, 5];
+                    case 4:
+                        _a = _b.sent();
+                        msg = "Image not resized!";
+                        return [3 /*break*/, 5];
+                    case 5:
+                        expect(msg).toEqual("Image resized!");
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    });
+});
+afterAll(function () { return __awaiter(void 0, void 0, void 0, function () {
+    var output_image, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                output_image = App_path.default.path.resolve(App_path.default.output_file_path, "icelandwaterfall_thumb.jpg");
+                _b.label = 1;
             case 1:
-                _a.sent();
-                console.log("server started at localhost: ", port);
-                return [2 /*return*/];
+                _b.trys.push([1, 4, , 5]);
+                return [4 /*yield*/, fs_1.promises.access(output_image)];
+            case 2:
+                _b.sent();
+                return [4 /*yield*/, fs_1.promises.unlink(output_image)];
+            case 3:
+                _b.sent();
+                return [3 /*break*/, 5];
+            case 4:
+                _a = _b.sent();
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); });
-exports.default = app;

@@ -43,16 +43,164 @@ var supertest_1 = __importDefault(require("supertest"));
 var index_1 = __importDefault(require("../index"));
 var request = (0, supertest_1.default)(index_1.default);
 describe("Test endpoint responses", function () {
-    it("gets the api endpoint", function () { return __awaiter(void 0, void 0, void 0, function () {
-        var response;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get("/")];
-                case 1:
-                    response = _a.sent();
-                    expect(response.status).toBe(200);
-                    return [2 /*return*/];
-            }
-        });
-    }); });
+    describe("Testing endpoint response: valid arguments", function () {
+        it("api endpoint ", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, request.get("/")];
+                    case 1:
+                        response = _a.sent();
+                        expect(response.status).toBe(200);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        it("existing images", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, request.get("/api/images?filename=encenadaport")];
+                    case 1:
+                        response = _a.sent();
+                        expect(response.status).toBe(200);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        it("specifying valid parameters", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, request.get("/api/images?filename=encenadaport&width=300&height=500")];
+                    case 1:
+                        response = _a.sent();
+                        expect(response.status).toBe(200);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    });
+    describe("Testing endpoint response: invalid arguments", function () {
+        it("invalid endpoint: returns 404", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, request.get("/sport")];
+                    case 1:
+                        response = _a.sent();
+                        expect(response.status).toBe(404);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        it("gets /images", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, request.get("/images")];
+                    case 1:
+                        response = _a.sent();
+                        expect(response.status).toBe(404);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        it("not specifying all required parameters", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, request.get("/images/encenadaport")];
+                    case 1:
+                        response = _a.sent();
+                        expect(response.status).toBe(404);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        it("non-existing image", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, request.get("/images?filename=non_existing")];
+                    case 1:
+                        response = _a.sent();
+                        expect(response.status).toBe(404);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        it("specifying filename and width without height", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, request.get("/images?filename=non_existing&&width=300")];
+                    case 1:
+                        response = _a.sent();
+                        expect(response.status).toBe(404);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        it("specifying filename and height without width", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, request.get("/images?filename=non_existing&&height=500")];
+                    case 1:
+                        response = _a.sent();
+                        expect(response.status).toBe(404);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        it("specifying a negative width", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, request.get("/images?filename=non_existing&&width=-300&&height=500")];
+                    case 1:
+                        response = _a.sent();
+                        expect(response.status).toBe(404);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        it("specifying an invalid width", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, request.get("/images?filename=non_existing&&width=west&&height=500")];
+                    case 1:
+                        response = _a.sent();
+                        expect(response.status).toBe(404);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        it("specifying a negative height", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, request.get("/images?filename=non_existing&&width=300&&height=-500")];
+                    case 1:
+                        response = _a.sent();
+                        expect(response.status).toBe(404);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        it("specifying an invalid height", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, request.get("/images?filename=non_existing&&width=300&&height=east")];
+                    case 1:
+                        response = _a.sent();
+                        expect(response.status).toBe(404);
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    });
 });

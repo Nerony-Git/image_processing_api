@@ -62,22 +62,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var index_1 = __importDefault(require("./routes/index"));
-var logger_1 = __importDefault(require("./utilities/logger"));
-var verify = __importStar(require("./utilities/validation"));
-var app = (0, express_1.default)();
-var port = 3000;
-app.use(logger_1.default, index_1.default);
-app.listen(port, function () { return __awaiter(void 0, void 0, void 0, function () {
+var App_path = __importStar(require("./app_path"));
+var resize_1 = __importDefault(require("./resize"));
+var output_file = function (fileData) { return __awaiter(void 0, void 0, void 0, function () {
+    var file_Path, output_file_Path, file_width, file_height;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, verify.default.check_output_folder()];
-            case 1:
-                _a.sent();
-                console.log("server started at localhost: ", port);
-                return [2 /*return*/];
+            case 0:
+                if (!(fileData.filename !== undefined || fileData.width !== undefined || fileData.height !== undefined)) return [3 /*break*/, 4];
+                file_Path = App_path.default.path.resolve(App_path.default.file_path, fileData.filename + ".jpg");
+                output_file_Path = App_path.default.path.resolve(App_path.default.output_file_path, fileData.filename + "_thumb.jpg");
+                file_width = parseInt(fileData.width || "");
+                file_height = parseInt(fileData.height || "");
+                if (!(!isNaN(file_width) && !isNaN(file_height))) return [3 /*break*/, 2];
+                return [4 /*yield*/, (0, resize_1.default)({
+                        file_path: file_Path,
+                        output_file_path: output_file_Path,
+                        width: file_width,
+                        height: file_height
+                    })];
+            case 1: return [2 /*return*/, _a.sent()];
+            case 2: return [2 /*return*/, undefined];
+            case 3: return [3 /*break*/, 5];
+            case 4: return [2 /*return*/, undefined];
+            case 5: return [2 /*return*/];
         }
     });
-}); });
-exports.default = app;
+}); };
+exports.default = output_file;

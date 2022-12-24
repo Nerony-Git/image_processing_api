@@ -58,26 +58,57 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var index_1 = __importDefault(require("./routes/index"));
-var logger_1 = __importDefault(require("./utilities/logger"));
-var verify = __importStar(require("./utilities/validation"));
-var app = (0, express_1.default)();
-var port = 3000;
-app.use(logger_1.default, index_1.default);
-app.listen(port, function () { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, verify.default.check_output_folder()];
+var App_path = __importStar(require("./app_path"));
+var fs_1 = require("fs");
+var get_output_file_path = function (fileData) { return __awaiter(void 0, void 0, void 0, function () {
+    var path_file, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                if (!(fileData.filename !== undefined)) return [3 /*break*/, 5];
+                path_file = fileData.width && fileData.height ? App_path.default.path.resolve(App_path.default.output_file_path, fileData.filename + "_thumb.jpg")
+                    : App_path.default.path.resolve(App_path.default.file_path, fileData.filename + ".jpg");
+                _b.label = 1;
             case 1:
-                _a.sent();
-                console.log("server started at localhost: ", port);
-                return [2 /*return*/];
+                _b.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, fs_1.promises.access(path_file)];
+            case 2:
+                _b.sent();
+                return [2 /*return*/, path_file];
+            case 3:
+                _a = _b.sent();
+                return [2 /*return*/, undefined];
+            case 4: return [3 /*break*/, 6];
+            case 5: return [2 /*return*/, undefined];
+            case 6: return [2 /*return*/];
         }
     });
-}); });
-exports.default = app;
+}); };
+var get_output_file = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var filename_array_1, files, _a, emptyArr;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 2, , 3]);
+                filename_array_1 = [];
+                return [4 /*yield*/, fs_1.promises.readdir(App_path.default.file_path)];
+            case 1:
+                files = _b.sent();
+                files.forEach(function (image_name) {
+                    if (image_name.length)
+                        filename_array_1.push(image_name.split(".")[0]);
+                });
+                return [2 /*return*/, filename_array_1];
+            case 2:
+                _a = _b.sent();
+                emptyArr = [];
+                return [2 /*return*/, emptyArr];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.default = {
+    get_output_file: get_output_file,
+    get_output_file_path: get_output_file_path
+};
