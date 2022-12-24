@@ -30,6 +30,31 @@ This project is an API that can be used in two different ways namely;
 >> ```  
 >  
   
+## 🔑 API Endpoint, Parameters & Port
+
+> **_Port_**
+>> The server listens on port **3000**.
+>>
+>> http://localhost:3000
+>>  
+>
+
+> **_Parameters_**
+>> The API accepts 3 parameters which are;
+>> **1️⃣ filename**
+>> **2️⃣ width**
+>> **3️⃣ height**
+>>  
+>  
+
+> **_API Endpoint_**
+>> The endpoint for the API,
+>> /api/images?filename=<filename>&width=<width>&height=<height>
+>> 
+>>  
+>
+
+
 ## 📝 Scripts
 > **_Run Server_**
 >> To start the server, type the code below in the terminal.
