@@ -9,14 +9,14 @@ This project is an API that can be used in two different ways namely;
 
 ## ⏬ Installation  
 > **_Clone repository_**  
-> Navigate to the directory you want to install the project, open command prompt from the directory and type the code below to clone this repository.  
+>> Navigate to the directory you want to install the project, open command prompt from the directory and type the code below to clone this repository.  
 >  
 >>```sh
 >> git clone https://github.com/Nerony-Git/image_processing_api.git
 >>```  
 >  
 > **_Open directory API was cloned to_**  
-> Navigate to the directory using the code below:  
+>> Navigate to the directory using the code below:  
 >  
 >>```sh
 >> cd image_processing_api
@@ -24,7 +24,7 @@ This project is an API that can be used in two different ways namely;
 >  
 > **_Install Dependecies_**  
 >> the code below will install all package dependencies needed to run this project  
->  
+>>  
 >> ```sh
 >>  npm install
 >> ```  
