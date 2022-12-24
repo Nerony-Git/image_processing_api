@@ -37,7 +37,7 @@ This project is an API that can be used in two different ways namely;
 >>
 >> http://localhost:3000
 >>  
->
+>>
 
 > **_Parameters_**
 >> The API accepts 3 parameters which are;
@@ -45,14 +45,13 @@ This project is an API that can be used in two different ways namely;
 >> **2️⃣ width**
 >> **3️⃣ height**
 >>  
->  
+>>  
 
 > **_API Endpoint_**
 >> The endpoint for the API,
 >> /api/images?filename=<filename>&width=<width>&height=<height>
->> 
 >>  
->
+>>  
 
 
 ## 📝 Scripts
