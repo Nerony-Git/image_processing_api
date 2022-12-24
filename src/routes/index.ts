@@ -3,10 +3,10 @@ import images from "./api/images";
 
 const routes = express.Router();
 
-routes.get("/", (req, res) => {
-    res.send("Hello, Udacity Main Test!!");
+routes.get("/", (request: express.Request, response: express.Response): void => {
+    response.send("Hello, Udacity Main Test!!");
 });
 
-routes.use("/images", images);
+routes.use("/api/images", images);
 
 export default routes;
