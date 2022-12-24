@@ -1,66 +1,36 @@
-import { path } from "app-root-path";
 import express from "express";
-import fs from "fs";
-import sharp from "sharp";
-//import { promises as fsPromises } from "fs";
+import * as verify from "../../utilities/validation";
+import output_file from "../../utilities/store_image_output";
+import * as image_path from "../../utilities/image_output_path";
+
 
 const images = express.Router();
 
-images.get("/", (req, res) => {
-    const filename = req.query.filename as string;
-    const width = req.query.width as string;
-    const height = req.query.height as string;
-    const file_path = "./images_data/image_input/" + filename + ".jpg" as string;
-    const output_filename = "/images_data/image_output/" + filename + "_thumb.jpg" as string;
-    const output_file_path = "./images_data/image_output/" + filename + "_thumb.jpg" as string;
+images.get("/", async(request: express.Request, response: express.Response): Promise <void> => {
+    const verify_params: string | undefined = await verify.default.check_params(request.query);
     
-
-
-    //Validate inputs
-    if(filename !== undefined && width !== undefined && height !== undefined) {
-        //res.send("File Name: " + filename + ", Width: " + width + ", Height: " + height);
-        // Check if file exist in image_input folder of the images_data folder
-        if(fs.existsSync(file_path)) {
-            console.log(filename + " exists in images data folder");
-
-            // Check if file exist in image_output folder of the images_data folder
-            if(fs.existsSync(output_file_path)){
-                //return already resized image in image_output folder
-                console.log("Yes");
-            }else{
-                //resize image 
-                sharp(file_path)
-                    .resize(parseInt(width), parseInt(height),{
-                        fit: "inside"
-                    })
-                    .toFile(output_file_path)
-                //console.log("");
-                res.sendFile(path + output_filename);
-            }
-        }else {
-            console.log(filename + " does not exists in images data folder");
-        }
-    }
-    else if(filename === undefined && width !== undefined && height !== undefined) {
-        res.send("Please input file name!")
-    }else if(filename !== undefined && width === undefined && height !== undefined) {
-        res.send("Please input width!")
-    }else if(filename !== undefined && width !== undefined && height === undefined) {
-        res.send("Please input height!")
-    }
-    else if(filename === undefined && width === undefined && height !== undefined) {
-        res.send("Please input file name and width!")
-    }else if(filename === undefined && width !== undefined && height === undefined) {
-        res.send("Please input file name and height!")
-    }else if(filename !== undefined && width === undefined && height === undefined) {
-        res.send("Please input width and height!")
-    }else if(filename === undefined && width === undefined && height === undefined) {
-        res.send("Please input values for filename, width and height")
+    if (verify_params) {
+        response.send(verify_params);
+        return;
     }
 
+    let w_response: string | undefined = "";
+    if ((await verify.default.output_exist(request.query)) === false) {
+        w_response = await output_file(request.query);
+    }
 
-    console.log("File Name: " + filename + ", Width: " + width + ", Height: " + height);
-    //res.send("Image Folder");
+    if (w_response) {
+        response.send(w_response);
+        return;
+    }
+    
+    const output_path: string | undefined = await image_path.default.get_output_file_path(request.query);
+    if (output_path){
+        response.sendFile(output_path);
+    }else {
+        response.send("Output Image can't be displayed!");
+    }
 });
+
 
 export default images;
