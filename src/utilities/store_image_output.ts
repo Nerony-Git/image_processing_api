@@ -26,7 +26,7 @@ const output_file = async (
         );
         output_file_Path = App_path.default.path.resolve(
             App_path.default.output_file_path,
-            fileData.filename + "_thumb.jpg"
+            fileData.filename + "-" + fileData.width + "-" + fileData.height + ".jpg"
         );
         file_width = parseInt(fileData.width || "");
         file_height = parseInt(fileData.height || "");

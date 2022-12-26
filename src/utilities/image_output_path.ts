@@ -16,7 +16,7 @@ const get_output_file_path = async (
             fileData.width && fileData.height
                 ? App_path.default.path.resolve(
                       App_path.default.output_file_path,
-                      fileData.filename + "_thumb.jpg"
+                      fileData.filename + "-" + fileData.width + "-" + fileData.height + ".jpg"
                   )
                 : App_path.default.path.resolve(
                       App_path.default.file_path,

@@ -13,7 +13,7 @@ describe("Testing image resizing", (): void => {
 
             const output_image: string = App_path.default.path.resolve(
                 App_path.default.output_file_path,
-                "icelandwaterfall_thumb.jpg"
+                "icelandwaterfall-200-500.jpg"
             );
             let msg: string | undefined;
             try {
@@ -31,7 +31,7 @@ describe("Testing image resizing", (): void => {
 afterAll(async (): Promise<void> => {
     const output_image: string = App_path.default.path.resolve(
         App_path.default.output_file_path,
-        "icelandwaterfall_thumb.jpg"
+        "icelandwaterfall-200-500.jpg"
     );
     try {
         await fsPromises.access(output_image);

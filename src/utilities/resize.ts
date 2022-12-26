@@ -12,9 +12,7 @@ const image_resize = async (
 ): Promise<string | undefined> => {
     try {
         await sharp(fileResizeData.file_path)
-            .resize(fileResizeData.width, fileResizeData.height, {
-                fit: "inside",
-            })
+            .resize(fileResizeData.width, fileResizeData.height)
             .toFormat("jpg")
             .toFile(fileResizeData.output_file_path);
         return;

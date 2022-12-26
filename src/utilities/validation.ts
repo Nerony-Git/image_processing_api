@@ -27,7 +27,7 @@ const output_exist = async (fileData: file): Promise<boolean> => {
     } else {
         filePath = App_path.default.path.resolve(
             App_path.default.output_file_path,
-            fileData.filename + "_thumb.jpg"
+            fileData.filename + "-" + fileData.width + "-" + fileData.height + ".jpg"
         );
     }
     try {

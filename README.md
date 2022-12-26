@@ -62,7 +62,7 @@ This project is an API that can be used in two different ways namely;
 >> npm run server
 >>```  
 >  
-> **_Prettier**
+> **_Prettier_**
 >> To format the code use the code below.
 >>
 >>```sh
