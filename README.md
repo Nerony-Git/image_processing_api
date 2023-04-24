@@ -1,13 +1,16 @@
-# Image Processing API   
+# Image Processing API
+
 **UDACITY - ALX Full-Stack Developer Nanodegree program.**  
 **Project 1️⃣**
 
-## Overview   
+## Overview
+
 This project is an API that can be used in two different ways namely;  
 **1️⃣ As a Simple Placeholder API:** allows a user to place images into their frontend with the width and height set via URL parameters for rapid prototyping.  
 **2️⃣ As a Library:** to serve properly scaled versions of images to the front end to reduce page load size rather than needing to resize and upload multiple copies of the same image to be used throughout the site.  
 
 ## ⏬ Installation  
+>
 > **_Clone repository_**  
 >> Navigate to the directory you want to install the project, open command prompt from the directory and type the code below to clone this repository.  
 >>  
@@ -35,7 +38,7 @@ This project is an API that can be used in two different ways namely;
 > **_Port_**
 >> The server listens on port **3000**.
 >>
->> http://localhost:3000
+>> <http://localhost:3000>
 >>  
 >
 > **_Parameters_**
@@ -47,14 +50,15 @@ This project is an API that can be used in two different ways namely;
 >  
 > **_API Endpoint_**
 >> The endpoint for the API,  
+>>
 >>```sh
 >> GET /api/images?filename=<filename>&width=<width>&height=<height>
 >>```
 >>  
 >  
 
-
 ## 📝 Scripts
+>
 > **_Run Server_**
 >> To start the server, type the code below in the terminal.
 >>
@@ -96,4 +100,5 @@ This project is an API that can be used in two different ways namely;
 >>```sh
 >> npm run server
 >>```  
+>>
 >  
